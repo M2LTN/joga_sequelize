@@ -2,16 +2,18 @@
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class Authors extends Model {
+  class Tags extends Model {
     static associate(models) {
-      this.hasMany(models.Article, {
-        foreignKey:'author_id',
-        as: 'articles'
-      })
+      this.belongsToMany(models.Article, {
+        foreignKey: 'tagId',
+        through: 'ArticleTags',
+        otherKey:'articleId'
+      });
+      
     }
   }
 
-  Authors.init({
+  Tags.init({
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
@@ -24,10 +26,10 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {
     sequelize,
-    modelName: 'Authors',
-    tableName: 'Authors',
-    timestamps: true 
+    modelName: 'Tags',
+    tableName: 'Tags',
+    timestamps: true
   });
 
-  return Authors;
+  return Tags;
 };

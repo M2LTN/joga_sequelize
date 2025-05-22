@@ -3,7 +3,9 @@
 module.exports = {
   up(queryInterface, Sequelize) {
     return Promise.all([
+      queryInterface.bulkDelete('Articles', null, {}),
       queryInterface.bulkInsert('Articles', [{
+        id:20,
         name: 'Introduction to Ashtanga',
         slug: 'introduction-to-ashtanga',
         image: 'ashtanga.jpg',
@@ -14,6 +16,7 @@ module.exports = {
         updatedAt: new Date()
       }]),
       queryInterface.bulkInsert('Articles', [{
+        id:22,
         name: 'Morning vinyasa flow routine',
         slug: 'morning-vinyasa-flow-routine',
         image: 'morning.jpg',
@@ -24,11 +27,12 @@ module.exports = {
         updatedAt: new Date()
       }]),
       queryInterface.bulkInsert('Articles', [{
+        id:21,
         name: 'Secrets of a yoga teacher',
         slug: 'secrets-of-a-yoga-teacher',
         image: 'yoga-teacher.jpg',
         body: '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>',
-        published: '2060-05-28 15:02:55',
+        published: '2010-05-28 15:02:55',
         author_id: 1,
         createdAt: new Date(),
         updatedAt: new Date()
