@@ -4,8 +4,10 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Authors extends Model {
     static associate(models) {
-      // define relationships here, e.g.
-      // Authors.hasMany(models.Articles, { foreignKey: 'author_id', as: 'articles' });
+      this.hasMany(models.Article, {
+        foreignKey:'author_id',
+        as: 'articles'
+      })
     }
   }
 
