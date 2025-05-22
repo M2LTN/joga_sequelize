@@ -22,10 +22,8 @@ sequelize
   });
 
 // simple route
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to sequelize application." });
-});
-
+const articleRouter = require("./routes/article");
+app.use('/', articleRouter);
 // listen requests
 app.listen(3000, () => {
   console.log('Server is running on http://localhost:3000');
