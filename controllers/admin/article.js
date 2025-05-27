@@ -35,7 +35,43 @@ const createArticle = (req, res) => {
   })
 }
 
+const updateArticle = (req, res) => {
+  let name = req.body.name;
+  let slug = req.body.slug;
+  let image = req.body.image;
+  let body = req.body.body;
+
+  models.Article.findOne({
+    where: { id: req.params.id },
+  })
+
+    .then((article) => {
+      if (!article) {
+        return res.status(404).json({ message: "Can't find the article" });
+      }
+      return article.update({
+        name: name,
+        slug: slug,
+        image: image,
+        body: body,
+      });
+    })
+    .then((updatedArticle) => {
+      console.log(updatedArticle);
+      return res
+        .status(200)
+        .json({ message: "Article is updated!", updatedArticle });
+    })
+    .catch((error) => {
+      console.error(error);
+      return res
+        .status(500)
+        .json({ message: "Error while updating article!", error: error.message });
+    });
+};
+
 // export controller functions
 module.exports = {
-  createArticle
+  createArticle,
+  updateArticle,
 }
