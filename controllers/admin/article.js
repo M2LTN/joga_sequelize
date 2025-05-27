@@ -70,8 +70,29 @@ const updateArticle = (req, res) => {
     });
 };
 
+const deleteArticle = (req, res) => {
+  models.Article.destroy({
+    where: { id: req.params.id },
+  })
+    .then((deletedCount) => {
+      if (deletedCount === 0) {
+        return res
+          .status(404)
+          .json({ message: "Article not found" });
+      }
+
+      return res.status(200).json({ message: "Deleted article" });
+    })
+    .catch((error) => {
+      return res
+        .status(500)
+        .json({ message: "Error while deleting article!", error: error.message });
+    });
+};
+
 // export controller functions
 module.exports = {
   createArticle,
   updateArticle,
+  deleteArticle
 }
